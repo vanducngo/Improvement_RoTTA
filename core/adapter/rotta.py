@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from ..utils import memory
+from ..utils import memory, memory_apq
 from .base_adapter import BaseAdapter
 from copy import deepcopy
 from .base_adapter import softmax_entropy
@@ -12,7 +12,26 @@ from ..utils.custom_transforms import get_tta_transforms
 class RoTTA(BaseAdapter):
     def __init__(self, cfg, model, optimizer):
         super(RoTTA, self).__init__(cfg, model, optimizer)
-        self.mem = memory.CSTU(capacity=self.cfg.ADAPTER.RoTTA.MEMORY_SIZE, num_class=cfg.CORRUPTION.NUM_CLASS, lambda_t=cfg.ADAPTER.RoTTA.LAMBDA_T, lambda_u=cfg.ADAPTER.RoTTA.LAMBDA_U)
+        
+        # self.mem = memory.CSTU(
+        #     capacity=self.cfg.ADAPTER.RoTTA.MEMORY_SIZE, 
+        #     num_class=cfg.CORRUPTION.NUM_CLASS, 
+        #     lambda_t=cfg.ADAPTER.RoTTA.LAMBDA_T, 
+        #     lambda_u=cfg.ADAPTER.RoTTA.LAMBDA_U
+        # )
+        
+        self.mem = memory_apq.APQMem(
+            capacity=self.cfg.ADAPTER.RoTTA.MEMORY_SIZE,
+            num_class=self.cfg.CORRUPTION.NUM_CLASS,
+            lambda_t=self.cfg.ADAPTER.RoTTA.LAMBDA_T,
+            lambda_u=self.cfg.ADAPTER.RoTTA.LAMBDA_U,
+            lambda_d=self.cfg.ADAPTER.APQ.LAMBDA_D,  # Tham số mới
+            age_factor_bonus=self.cfg.ADAPTER.APQ.AGE_FACTOR  # Tham số mới
+        )
+        # Khởi tạo một biến để theo dõi entropy
+        self.ema_entropy = 0.0
+        self.alpha_entropy = 0.99 # Hệ số EMA cho entropy
+        
         self.model_ema = self.build_ema(self.model)
         self.transform = get_tta_transforms(cfg)
         self.nu = cfg.ADAPTER.RoTTA.NU
@@ -30,16 +49,27 @@ class RoTTA(BaseAdapter):
             pseudo_label = torch.argmax(predict, dim=1)
             entropy = torch.sum(- predict * torch.log(predict + 1e-6), dim=1)
 
+        # Tính drift signal (NEW)
+        current_batch_entropy = entropy.mean().item()
+        if self.ema_entropy == 0.0: # Khởi tạo lần đầu
+            self.ema_entropy = current_batch_entropy
+        
+        drift_signal = (current_batch_entropy - self.ema_entropy) / (self.ema_entropy + 1e-6)
+        
+        # Cập nhật EMA entropy
+        self.ema_entropy = self.alpha_entropy * self.ema_entropy + (1 - self.alpha_entropy) * current_batch_entropy
+
         # add into memory
         for i, data in enumerate(batch_data):
             p_l = pseudo_label[i].item()
             uncertainty = entropy[i].item()
             current_instance = (data, p_l, uncertainty)
-            self.mem.add_instance(current_instance)
+            self.mem.add_instance(current_instance, drift_signal)
             self.current_instance += 1
 
             if self.current_instance % self.update_frequency == 0:
                 self.update_model(model, optimizer)
+                pass
 
         return ema_out
 

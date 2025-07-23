@@ -100,6 +100,10 @@ _C.ADAPTER.RoTTA.ALPHA = 0.05
 _C.ADAPTER.RoTTA.LAMBDA_T = 1.0
 _C.ADAPTER.RoTTA.LAMBDA_U = 1.0
 
+_C.ADAPTER.APQ = CN()
+_C.ADAPTER.APQ.LAMBDA_D = 0.5
+_C.ADAPTER.APQ.AGE_FACTOR = 5.0
+
 # --------------------------------- Default config -------------------------- #
 _CFG_DEFAULT = _C.clone()
 _CFG_DEFAULT.freeze()

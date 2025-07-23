@@ -20,6 +20,9 @@ ADAPTER:
     LAMBDA_T: 1.0
     LAMBDA_U: 1.0
     ALPHA: 0.05
+  APQ:
+    LAMBDA_D: 0.5
+    AGE_FACTOR: 5.0
 
 LOADER:
   SAMPLER:
