@@ -1,0 +1,91 @@
+2025-07-24 13:27:27,286 TTA INFO: Namespace(adapter_config_file='configs/adapter/rotta.yaml', dataset_config_file='configs/dataset/cifar100.yaml', order_config_file='', opts=['OUTPUT_DIR', 'RoTTA/cifar100'])
+2025-07-24 13:27:27,286 TTA INFO: Loaded configuration file: 
+	adapter: configs/adapter/rotta.yaml
+	dataset: configs/dataset/cifar100.yaml
+	order: 
+2025-07-24 13:27:27,286 TTA INFO: Running with config:
+ADAPTER:
+  APQ:
+    AGE_FACTOR: 5.0
+    LAMBDA_D: 0.5
+  NAME: rotta
+  RoTTA:
+    ALPHA: 0.05
+    LAMBDA_T: 1.0
+    LAMBDA_U: 1.0
+    MEMORY_SIZE: 64
+    NU: 0.001
+    UPDATE_FREQUENCY: 64
+BN:
+  EPS: 1e-05
+  MOM: 0.1
+CKPT_DIR: ./ckpt
+CORRUPTION:
+  DATASET: cifar100
+  NUM_CLASS: 100
+  NUM_EX: 10000
+  SEVERITY: [5]
+  SOURCE: 
+  TYPE: ['motion_blur', 'snow', 'fog', 'shot_noise', 'defocus_blur', 'contrast', 'zoom_blur', 'brightness', 'frost', 'elastic_transform', 'glass_blur', 'gaussian_noise', 'pixelate', 'jpeg_compression', 'impulse_noise']
+CUDNN:
+  BENCHMARK: True
+DATA_DIR: ./datasets
+DEBUG: 0
+DESC: 
+INPUT:
+  INTERPOLATION: bilinear
+  PIXEL_MEAN: [0.485, 0.456, 0.406]
+  PIXEL_STD: [0.229, 0.224, 0.225]
+  SIZE: (32, 32)
+  TRANSFORMS: ('normalize',)
+LOADER:
+  NUM_WORKS: 2
+  SAMPLER:
+    GAMMA: 0.1
+    TYPE: temporal
+LOG_DEST: log.txt
+LOG_TIME: 
+MODEL:
+  ARCH: Hendrycks2020AugMix_ResNeXt
+  EPISODIC: False
+  PROJECTION:
+    EMB_DIM: 2048
+    FEA_DIM: 128
+    HEAD: linear
+OPTIM:
+  BETA: 0.9
+  DAMPENING: 0.0
+  LR: 0.001
+  METHOD: Adam
+  MOMENTUM: 0.9
+  NESTEROV: True
+  STEPS: 1
+  WD: 0.0
+OUTPUT_DIR: RoTTA/cifar100
+SEED: -1
+TEST:
+  BATCH_SIZE: 64
+2025-07-24 13:39:18,872 TTA.test_time INFO: All Results
++---------------------+----------+------------+
+|      Corruption     | Accuracy | Error Rate |
++---------------------+----------+------------+
+|    motion_blur_5    |  65.80   |   34.20    |
+|        snow_5       |  60.27   |   39.73    |
+|        fog_5        |  57.94   |   42.06    |
+|     shot_noise_5    |  57.04   |   42.96    |
+|    defocus_blur_5   |  69.59   |   30.41    |
+|      contrast_5     |  62.03   |   37.97    |
+|     zoom_blur_5     |  72.72   |   27.28    |
+|     brightness_5    |  74.76   |   25.24    |
+|       frost_5       |  68.26   |   31.74    |
+| elastic_transform_5 |  65.58   |   34.42    |
+|     glass_blur_5    |  61.92   |   38.08    |
+|   gaussian_noise_5  |  62.30   |   37.70    |
+|      pixelate_5     |  68.94   |   31.06    |
+|  jpeg_compression_5 |  61.84   |   38.16    |
+|   impulse_noise_5   |  58.19   |   41.81    |
+|      Total Avg      |  64.48   |   35.52    |
++---------------------+----------+------------+ 
+You should better calculate the per-class average by yourself!
+summary: 34.20	39.73	42.06	42.96	30.41	37.97	27.28	25.24	31.74	34.42	38.08	37.70	31.06	38.16	41.81
+

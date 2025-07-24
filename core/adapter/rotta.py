@@ -13,21 +13,22 @@ class RoTTA(BaseAdapter):
     def __init__(self, cfg, model, optimizer):
         super(RoTTA, self).__init__(cfg, model, optimizer)
         
-        # self.mem = memory.CSTU(
-        #     capacity=self.cfg.ADAPTER.RoTTA.MEMORY_SIZE, 
-        #     num_class=cfg.CORRUPTION.NUM_CLASS, 
-        #     lambda_t=cfg.ADAPTER.RoTTA.LAMBDA_T, 
-        #     lambda_u=cfg.ADAPTER.RoTTA.LAMBDA_U
-        # )
-        
-        self.mem = memory_apq.APQMem(
-            capacity=self.cfg.ADAPTER.RoTTA.MEMORY_SIZE,
-            num_class=self.cfg.CORRUPTION.NUM_CLASS,
-            lambda_t=self.cfg.ADAPTER.RoTTA.LAMBDA_T,
-            lambda_u=self.cfg.ADAPTER.RoTTA.LAMBDA_U,
-            lambda_d=self.cfg.ADAPTER.APQ.LAMBDA_D,  # Tham số mới
-            age_factor_bonus=self.cfg.ADAPTER.APQ.AGE_FACTOR  # Tham số mới
+        self.mem = memory.CSTU(
+            capacity=self.cfg.ADAPTER.RoTTA.MEMORY_SIZE, 
+            num_class=cfg.CORRUPTION.NUM_CLASS, 
+            lambda_t=cfg.ADAPTER.RoTTA.LAMBDA_T, 
+            lambda_u=cfg.ADAPTER.RoTTA.LAMBDA_U
         )
+        
+        # self.mem = memory_apq.APQMem(
+        #     capacity=self.cfg.ADAPTER.RoTTA.MEMORY_SIZE,
+        #     num_class=self.cfg.CORRUPTION.NUM_CLASS,
+        #     lambda_t=self.cfg.ADAPTER.RoTTA.LAMBDA_T,
+        #     lambda_u=self.cfg.ADAPTER.RoTTA.LAMBDA_U,
+        #     lambda_d=self.cfg.ADAPTER.APQ.LAMBDA_D,  # Tham số mới
+        #     age_factor_bonus=self.cfg.ADAPTER.APQ.AGE_FACTOR  # Tham số mới
+        # )
+
         # Khởi tạo một biến để theo dõi entropy
         self.ema_entropy = 0.0
         self.alpha_entropy = 0.99 # Hệ số EMA cho entropy
@@ -64,7 +65,10 @@ class RoTTA(BaseAdapter):
             p_l = pseudo_label[i].item()
             uncertainty = entropy[i].item()
             current_instance = (data, p_l, uncertainty)
-            self.mem.add_instance(current_instance, drift_signal)
+
+            self.mem.add_instance(current_instance)
+            # self.mem.add_instance(current_instance, drift_signal)
+
             self.current_instance += 1
 
             if self.current_instance % self.update_frequency == 0:
