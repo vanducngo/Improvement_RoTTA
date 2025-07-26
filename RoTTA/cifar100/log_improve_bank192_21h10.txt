@@ -1,0 +1,704 @@
+2025-07-26 16:56:13,585 TTA INFO: Namespace(adapter_config_file='configs/adapter/rotta.yaml', dataset_config_file='configs/dataset/cifar100.yaml', order_config_file='', opts=['OUTPUT_DIR', 'RoTTA/cifar100'])
+2025-07-26 16:56:13,585 TTA INFO: Loaded configuration file: 
+	adapter: configs/adapter/rotta.yaml
+	dataset: configs/dataset/cifar100.yaml
+	order: 
+2025-07-26 16:56:13,585 TTA INFO: Running with config:
+ADAPTER:
+  APQ:
+    AGE_FACTOR: 5.0
+    LAMBDA_D: 0.25
+  NAME: rotta
+  RoTTA:
+    ALPHA: 0.05
+    LAMBDA_T: 1.0
+    LAMBDA_U: 1.0
+    MEMORY_SIZE: 64
+    NU: 0.001
+    UPDATE_FREQUENCY: 64
+BN:
+  EPS: 1e-05
+  MOM: 0.1
+CKPT_DIR: ./ckpt
+CORRUPTION:
+  DATASET: cifar100
+  NUM_CLASS: 100
+  NUM_EX: 10000
+  SEVERITY: [5]
+  SOURCE: 
+  TYPE: ['motion_blur', 'snow', 'fog', 'shot_noise', 'defocus_blur', 'contrast', 'zoom_blur', 'brightness', 'frost', 'elastic_transform', 'glass_blur', 'gaussian_noise', 'pixelate', 'jpeg_compression', 'impulse_noise']
+CUDNN:
+  BENCHMARK: True
+DATA_DIR: ./datasets
+DEBUG: 0
+DESC: 
+INPUT:
+  INTERPOLATION: bilinear
+  PIXEL_MEAN: [0.485, 0.456, 0.406]
+  PIXEL_STD: [0.229, 0.224, 0.225]
+  SIZE: (32, 32)
+  TRANSFORMS: ('normalize',)
+LOADER:
+  NUM_WORKS: 2
+  SAMPLER:
+    GAMMA: 0.1
+    TYPE: temporal
+LOG_DEST: log.txt
+LOG_TIME: 
+MODEL:
+  ARCH: Hendrycks2020AugMix_ResNeXt
+  EPISODIC: False
+  PROJECTION:
+    EMB_DIM: 2048
+    FEA_DIM: 128
+    HEAD: linear
+OPTIM:
+  BETA: 0.9
+  DAMPENING: 0.0
+  LR: 0.001
+  METHOD: Adam
+  MOMENTUM: 0.9
+  NESTEROV: True
+  STEPS: 1
+  WD: 0.0
+OUTPUT_DIR: RoTTA/cifar100
+SEED: -1
+TEST:
+  BATCH_SIZE: 64
+2025-07-26 17:14:05,670 TTA.test_time INFO: All Results
++---------------------+----------+------------+
+|      Corruption     | Accuracy | Error Rate |
++---------------------+----------+------------+
+|    motion_blur_5    |  65.24   |   34.76    |
+|        snow_5       |  60.64   |   39.36    |
+|        fog_5        |  58.14   |   41.86    |
+|     shot_noise_5    |  56.40   |   43.60    |
+|    defocus_blur_5   |  69.35   |   30.65    |
+|      contrast_5     |  59.72   |   40.28    |
+|     zoom_blur_5     |  72.35   |   27.65    |
+|     brightness_5    |  74.83   |   25.17    |
+|       frost_5       |  68.61   |   31.39    |
+| elastic_transform_5 |  66.23   |   33.77    |
+|     glass_blur_5    |  62.89   |   37.11    |
+|   gaussian_noise_5  |  62.61   |   37.39    |
+|      pixelate_5     |  68.52   |   31.48    |
+|  jpeg_compression_5 |  63.05   |   36.95    |
+|   impulse_noise_5   |  58.71   |   41.29    |
+|      Total Avg      |  64.49   |   35.51    |
++---------------------+----------+------------+ 
+You should better calculate the per-class average by yourself!
+summary: 34.76	39.36	41.86	43.60	30.65	40.28	27.65	25.17	31.39	33.77	37.11	37.39	31.48	36.95	41.29
+
+2025-07-26 17:15:28,254 TTA INFO: Namespace(adapter_config_file='configs/adapter/rotta.yaml', dataset_config_file='configs/dataset/cifar100.yaml', order_config_file='', opts=['OUTPUT_DIR', 'RoTTA/cifar100'])
+2025-07-26 17:15:28,255 TTA INFO: Loaded configuration file: 
+	adapter: configs/adapter/rotta.yaml
+	dataset: configs/dataset/cifar100.yaml
+	order: 
+2025-07-26 17:15:28,255 TTA INFO: Running with config:
+ADAPTER:
+  APQ:
+    AGE_FACTOR: 5.0
+    LAMBDA_D: 0.1
+  NAME: rotta
+  RoTTA:
+    ALPHA: 0.05
+    LAMBDA_T: 1.0
+    LAMBDA_U: 1.0
+    MEMORY_SIZE: 64
+    NU: 0.001
+    UPDATE_FREQUENCY: 64
+BN:
+  EPS: 1e-05
+  MOM: 0.1
+CKPT_DIR: ./ckpt
+CORRUPTION:
+  DATASET: cifar100
+  NUM_CLASS: 100
+  NUM_EX: 10000
+  SEVERITY: [5]
+  SOURCE: 
+  TYPE: ['motion_blur', 'snow', 'fog', 'shot_noise', 'defocus_blur', 'contrast', 'zoom_blur', 'brightness', 'frost', 'elastic_transform', 'glass_blur', 'gaussian_noise', 'pixelate', 'jpeg_compression', 'impulse_noise']
+CUDNN:
+  BENCHMARK: True
+DATA_DIR: ./datasets
+DEBUG: 0
+DESC: 
+INPUT:
+  INTERPOLATION: bilinear
+  PIXEL_MEAN: [0.485, 0.456, 0.406]
+  PIXEL_STD: [0.229, 0.224, 0.225]
+  SIZE: (32, 32)
+  TRANSFORMS: ('normalize',)
+LOADER:
+  NUM_WORKS: 2
+  SAMPLER:
+    GAMMA: 0.1
+    TYPE: temporal
+LOG_DEST: log.txt
+LOG_TIME: 
+MODEL:
+  ARCH: Hendrycks2020AugMix_ResNeXt
+  EPISODIC: False
+  PROJECTION:
+    EMB_DIM: 2048
+    FEA_DIM: 128
+    HEAD: linear
+OPTIM:
+  BETA: 0.9
+  DAMPENING: 0.0
+  LR: 0.001
+  METHOD: Adam
+  MOMENTUM: 0.9
+  NESTEROV: True
+  STEPS: 1
+  WD: 0.0
+OUTPUT_DIR: RoTTA/cifar100
+SEED: -1
+TEST:
+  BATCH_SIZE: 64
+2025-07-26 17:27:13,265 TTA.test_time INFO: All Results
++---------------------+----------+------------+
+|      Corruption     | Accuracy | Error Rate |
++---------------------+----------+------------+
+|    motion_blur_5    |  65.51   |   34.49    |
+|        snow_5       |  60.86   |   39.14    |
+|        fog_5        |  57.76   |   42.24    |
+|     shot_noise_5    |  57.51   |   42.49    |
+|    defocus_blur_5   |  71.12   |   28.88    |
+|      contrast_5     |  63.27   |   36.73    |
+|     zoom_blur_5     |  73.35   |   26.65    |
+|     brightness_5    |  75.74   |   24.26    |
+|       frost_5       |  69.33   |   30.67    |
+| elastic_transform_5 |  66.32   |   33.68    |
+|     glass_blur_5    |  62.43   |   37.57    |
+|   gaussian_noise_5  |  62.93   |   37.07    |
+|      pixelate_5     |  69.07   |   30.93    |
+|  jpeg_compression_5 |  62.48   |   37.52    |
+|   impulse_noise_5   |  58.01   |   41.99    |
+|      Total Avg      |  65.05   |   34.95    |
++---------------------+----------+------------+ 
+You should better calculate the per-class average by yourself!
+summary: 34.49	39.14	42.24	42.49	28.88	36.73	26.65	24.26	30.67	33.68	37.57	37.07	30.93	37.52	41.99
+
+2025-07-26 18:03:41,438 TTA INFO: Namespace(adapter_config_file='configs/adapter/rotta.yaml', dataset_config_file='configs/dataset/cifar100.yaml', order_config_file='', opts=['OUTPUT_DIR', 'RoTTA/cifar100'])
+2025-07-26 18:03:41,438 TTA INFO: Loaded configuration file: 
+	adapter: configs/adapter/rotta.yaml
+	dataset: configs/dataset/cifar100.yaml
+	order: 
+2025-07-26 18:03:41,438 TTA INFO: Running with config:
+ADAPTER:
+  APQ:
+    AGE_FACTOR: 5.0
+    LAMBDA_D: 0.25
+  NAME: rotta
+  RoTTA:
+    ALPHA: 0.05
+    LAMBDA_T: 1.0
+    LAMBDA_U: 1.0
+    MEMORY_SIZE: 64
+    NU: 0.001
+    UPDATE_FREQUENCY: 64
+BN:
+  EPS: 1e-05
+  MOM: 0.1
+CKPT_DIR: ./ckpt
+CORRUPTION:
+  DATASET: cifar100
+  NUM_CLASS: 100
+  NUM_EX: 10000
+  SEVERITY: [5]
+  SOURCE: 
+  TYPE: ['motion_blur', 'snow', 'fog', 'shot_noise', 'defocus_blur', 'contrast', 'zoom_blur', 'brightness', 'frost', 'elastic_transform', 'glass_blur', 'gaussian_noise', 'pixelate', 'jpeg_compression', 'impulse_noise']
+CUDNN:
+  BENCHMARK: True
+DATA_DIR: ./datasets
+DEBUG: 0
+DESC: 
+INPUT:
+  INTERPOLATION: bilinear
+  PIXEL_MEAN: [0.485, 0.456, 0.406]
+  PIXEL_STD: [0.229, 0.224, 0.225]
+  SIZE: (32, 32)
+  TRANSFORMS: ('normalize',)
+LOADER:
+  NUM_WORKS: 2
+  SAMPLER:
+    GAMMA: 0.1
+    TYPE: temporal
+LOG_DEST: log.txt
+LOG_TIME: 
+MODEL:
+  ARCH: Hendrycks2020AugMix_ResNeXt
+  EPISODIC: False
+  PROJECTION:
+    EMB_DIM: 2048
+    FEA_DIM: 128
+    HEAD: linear
+OPTIM:
+  BETA: 0.9
+  DAMPENING: 0.0
+  LR: 0.001
+  METHOD: Adam
+  MOMENTUM: 0.9
+  NESTEROV: True
+  STEPS: 1
+  WD: 0.0
+OUTPUT_DIR: RoTTA/cifar100
+SEED: -1
+TEST:
+  BATCH_SIZE: 64
+2025-07-26 18:15:23,521 TTA.test_time INFO: All Results
++---------------------+----------+------------+
+|      Corruption     | Accuracy | Error Rate |
++---------------------+----------+------------+
+|    motion_blur_5    |  66.12   |   33.88    |
+|        snow_5       |  60.19   |   39.81    |
+|        fog_5        |  58.09   |   41.91    |
+|     shot_noise_5    |  56.08   |   43.92    |
+|    defocus_blur_5   |  70.07   |   29.93    |
+|      contrast_5     |  62.20   |   37.80    |
+|     zoom_blur_5     |  71.77   |   28.23    |
+|     brightness_5    |  74.92   |   25.08    |
+|       frost_5       |  67.38   |   32.62    |
+| elastic_transform_5 |  65.01   |   34.99    |
+|     glass_blur_5    |  62.20   |   37.80    |
+|   gaussian_noise_5  |  62.21   |   37.79    |
+|      pixelate_5     |  68.53   |   31.47    |
+|  jpeg_compression_5 |  61.96   |   38.04    |
+|   impulse_noise_5   |  58.46   |   41.54    |
+|      Total Avg      |  64.35   |   35.65    |
++---------------------+----------+------------+ 
+You should better calculate the per-class average by yourself!
+summary: 33.88	39.81	41.91	43.92	29.93	37.80	28.23	25.08	32.62	34.99	37.80	37.79	31.47	38.04	41.54
+
+2025-07-26 18:17:24,935 TTA INFO: Namespace(adapter_config_file='configs/adapter/rotta.yaml', dataset_config_file='configs/dataset/cifar100.yaml', order_config_file='', opts=['OUTPUT_DIR', 'RoTTA/cifar100'])
+2025-07-26 18:17:24,935 TTA INFO: Loaded configuration file: 
+	adapter: configs/adapter/rotta.yaml
+	dataset: configs/dataset/cifar100.yaml
+	order: 
+2025-07-26 18:17:24,936 TTA INFO: Running with config:
+ADAPTER:
+  APQ:
+    AGE_FACTOR: 2.5
+    LAMBDA_D: 0.1
+  NAME: rotta
+  RoTTA:
+    ALPHA: 0.05
+    LAMBDA_T: 1.0
+    LAMBDA_U: 1.0
+    MEMORY_SIZE: 64
+    NU: 0.001
+    UPDATE_FREQUENCY: 64
+BN:
+  EPS: 1e-05
+  MOM: 0.1
+CKPT_DIR: ./ckpt
+CORRUPTION:
+  DATASET: cifar100
+  NUM_CLASS: 100
+  NUM_EX: 10000
+  SEVERITY: [5]
+  SOURCE: 
+  TYPE: ['motion_blur', 'snow', 'fog', 'shot_noise', 'defocus_blur', 'contrast', 'zoom_blur', 'brightness', 'frost', 'elastic_transform', 'glass_blur', 'gaussian_noise', 'pixelate', 'jpeg_compression', 'impulse_noise']
+CUDNN:
+  BENCHMARK: True
+DATA_DIR: ./datasets
+DEBUG: 0
+DESC: 
+INPUT:
+  INTERPOLATION: bilinear
+  PIXEL_MEAN: [0.485, 0.456, 0.406]
+  PIXEL_STD: [0.229, 0.224, 0.225]
+  SIZE: (32, 32)
+  TRANSFORMS: ('normalize',)
+LOADER:
+  NUM_WORKS: 2
+  SAMPLER:
+    GAMMA: 0.1
+    TYPE: temporal
+LOG_DEST: log.txt
+LOG_TIME: 
+MODEL:
+  ARCH: Hendrycks2020AugMix_ResNeXt
+  EPISODIC: False
+  PROJECTION:
+    EMB_DIM: 2048
+    FEA_DIM: 128
+    HEAD: linear
+OPTIM:
+  BETA: 0.9
+  DAMPENING: 0.0
+  LR: 0.001
+  METHOD: Adam
+  MOMENTUM: 0.9
+  NESTEROV: True
+  STEPS: 1
+  WD: 0.0
+OUTPUT_DIR: RoTTA/cifar100
+SEED: -1
+TEST:
+  BATCH_SIZE: 64
+2025-07-26 18:29:09,563 TTA.test_time INFO: All Results
++---------------------+----------+------------+
+|      Corruption     | Accuracy | Error Rate |
++---------------------+----------+------------+
+|    motion_blur_5    |  65.89   |   34.11    |
+|        snow_5       |  60.45   |   39.55    |
+|        fog_5        |  57.89   |   42.11    |
+|     shot_noise_5    |  56.55   |   43.45    |
+|    defocus_blur_5   |  70.18   |   29.82    |
+|      contrast_5     |  64.17   |   35.83    |
+|     zoom_blur_5     |  72.51   |   27.49    |
+|     brightness_5    |  75.11   |   24.89    |
+|       frost_5       |  68.44   |   31.56    |
+| elastic_transform_5 |  66.14   |   33.86    |
+|     glass_blur_5    |  62.23   |   37.77    |
+|   gaussian_noise_5  |  62.28   |   37.72    |
+|      pixelate_5     |  67.64   |   32.36    |
+|  jpeg_compression_5 |  61.85   |   38.15    |
+|   impulse_noise_5   |  58.16   |   41.84    |
+|      Total Avg      |  64.63   |   35.37    |
++---------------------+----------+------------+ 
+You should better calculate the per-class average by yourself!
+summary: 34.11	39.55	42.11	43.45	29.82	35.83	27.49	24.89	31.56	33.86	37.77	37.72	32.36	38.15	41.84
+
+2025-07-26 18:31:06,187 TTA INFO: Namespace(adapter_config_file='configs/adapter/rotta.yaml', dataset_config_file='configs/dataset/cifar100.yaml', order_config_file='', opts=['OUTPUT_DIR', 'RoTTA/cifar100'])
+2025-07-26 18:31:06,187 TTA INFO: Loaded configuration file: 
+	adapter: configs/adapter/rotta.yaml
+	dataset: configs/dataset/cifar100.yaml
+	order: 
+2025-07-26 18:31:06,187 TTA INFO: Running with config:
+ADAPTER:
+  APQ:
+    AGE_FACTOR: 10.0
+    LAMBDA_D: 0.1
+  NAME: rotta
+  RoTTA:
+    ALPHA: 0.05
+    LAMBDA_T: 1.0
+    LAMBDA_U: 1.0
+    MEMORY_SIZE: 64
+    NU: 0.001
+    UPDATE_FREQUENCY: 64
+BN:
+  EPS: 1e-05
+  MOM: 0.1
+CKPT_DIR: ./ckpt
+CORRUPTION:
+  DATASET: cifar100
+  NUM_CLASS: 100
+  NUM_EX: 10000
+  SEVERITY: [5]
+  SOURCE: 
+  TYPE: ['motion_blur', 'snow', 'fog', 'shot_noise', 'defocus_blur', 'contrast', 'zoom_blur', 'brightness', 'frost', 'elastic_transform', 'glass_blur', 'gaussian_noise', 'pixelate', 'jpeg_compression', 'impulse_noise']
+CUDNN:
+  BENCHMARK: True
+DATA_DIR: ./datasets
+DEBUG: 0
+DESC: 
+INPUT:
+  INTERPOLATION: bilinear
+  PIXEL_MEAN: [0.485, 0.456, 0.406]
+  PIXEL_STD: [0.229, 0.224, 0.225]
+  SIZE: (32, 32)
+  TRANSFORMS: ('normalize',)
+LOADER:
+  NUM_WORKS: 2
+  SAMPLER:
+    GAMMA: 0.1
+    TYPE: temporal
+LOG_DEST: log.txt
+LOG_TIME: 
+MODEL:
+  ARCH: Hendrycks2020AugMix_ResNeXt
+  EPISODIC: False
+  PROJECTION:
+    EMB_DIM: 2048
+    FEA_DIM: 128
+    HEAD: linear
+OPTIM:
+  BETA: 0.9
+  DAMPENING: 0.0
+  LR: 0.001
+  METHOD: Adam
+  MOMENTUM: 0.9
+  NESTEROV: True
+  STEPS: 1
+  WD: 0.0
+OUTPUT_DIR: RoTTA/cifar100
+SEED: -1
+TEST:
+  BATCH_SIZE: 64
+2025-07-26 18:42:51,627 TTA.test_time INFO: All Results
++---------------------+----------+------------+
+|      Corruption     | Accuracy | Error Rate |
++---------------------+----------+------------+
+|    motion_blur_5    |  65.95   |   34.05    |
+|        snow_5       |  60.82   |   39.18    |
+|        fog_5        |  57.75   |   42.25    |
+|     shot_noise_5    |  56.68   |   43.32    |
+|    defocus_blur_5   |  70.08   |   29.92    |
+|      contrast_5     |  63.43   |   36.57    |
+|     zoom_blur_5     |  72.50   |   27.50    |
+|     brightness_5    |  75.14   |   24.86    |
+|       frost_5       |  68.67   |   31.33    |
+| elastic_transform_5 |  66.38   |   33.62    |
+|     glass_blur_5    |  62.43   |   37.57    |
+|   gaussian_noise_5  |  62.40   |   37.60    |
+|      pixelate_5     |  67.84   |   32.16    |
+|  jpeg_compression_5 |  62.07   |   37.93    |
+|   impulse_noise_5   |  58.68   |   41.32    |
+|      Total Avg      |  64.72   |   35.28    |
++---------------------+----------+------------+ 
+You should better calculate the per-class average by yourself!
+summary: 34.05	39.18	42.25	43.32	29.92	36.57	27.50	24.86	31.33	33.62	37.57	37.60	32.16	37.93	41.32
+
+2025-07-26 18:43:27,929 TTA INFO: Namespace(adapter_config_file='configs/adapter/rotta.yaml', dataset_config_file='configs/dataset/cifar100.yaml', order_config_file='', opts=['OUTPUT_DIR', 'RoTTA/cifar100'])
+2025-07-26 18:43:27,929 TTA INFO: Loaded configuration file: 
+	adapter: configs/adapter/rotta.yaml
+	dataset: configs/dataset/cifar100.yaml
+	order: 
+2025-07-26 18:43:27,929 TTA INFO: Running with config:
+ADAPTER:
+  APQ:
+    AGE_FACTOR: 10.0
+    LAMBDA_D: 0.1
+  NAME: rotta
+  RoTTA:
+    ALPHA: 0.05
+    LAMBDA_T: 1.0
+    LAMBDA_U: 1.0
+    MEMORY_SIZE: 128
+    NU: 0.001
+    UPDATE_FREQUENCY: 64
+BN:
+  EPS: 1e-05
+  MOM: 0.1
+CKPT_DIR: ./ckpt
+CORRUPTION:
+  DATASET: cifar100
+  NUM_CLASS: 100
+  NUM_EX: 10000
+  SEVERITY: [5]
+  SOURCE: 
+  TYPE: ['motion_blur', 'snow', 'fog', 'shot_noise', 'defocus_blur', 'contrast', 'zoom_blur', 'brightness', 'frost', 'elastic_transform', 'glass_blur', 'gaussian_noise', 'pixelate', 'jpeg_compression', 'impulse_noise']
+CUDNN:
+  BENCHMARK: True
+DATA_DIR: ./datasets
+DEBUG: 0
+DESC: 
+INPUT:
+  INTERPOLATION: bilinear
+  PIXEL_MEAN: [0.485, 0.456, 0.406]
+  PIXEL_STD: [0.229, 0.224, 0.225]
+  SIZE: (32, 32)
+  TRANSFORMS: ('normalize',)
+LOADER:
+  NUM_WORKS: 2
+  SAMPLER:
+    GAMMA: 0.1
+    TYPE: temporal
+LOG_DEST: log.txt
+LOG_TIME: 
+MODEL:
+  ARCH: Hendrycks2020AugMix_ResNeXt
+  EPISODIC: False
+  PROJECTION:
+    EMB_DIM: 2048
+    FEA_DIM: 128
+    HEAD: linear
+OPTIM:
+  BETA: 0.9
+  DAMPENING: 0.0
+  LR: 0.001
+  METHOD: Adam
+  MOMENTUM: 0.9
+  NESTEROV: True
+  STEPS: 1
+  WD: 0.0
+OUTPUT_DIR: RoTTA/cifar100
+SEED: -1
+TEST:
+  BATCH_SIZE: 64
+2025-07-26 19:04:02,508 TTA.test_time INFO: All Results
++---------------------+----------+------------+
+|      Corruption     | Accuracy | Error Rate |
++---------------------+----------+------------+
+|    motion_blur_5    |  67.16   |   32.84    |
+|        snow_5       |  62.06   |   37.94    |
+|        fog_5        |  58.30   |   41.70    |
+|     shot_noise_5    |  57.96   |   42.04    |
+|    defocus_blur_5   |  70.11   |   29.89    |
+|      contrast_5     |  66.74   |   33.26    |
+|     zoom_blur_5     |  72.83   |   27.17    |
+|     brightness_5    |  75.28   |   24.72    |
+|       frost_5       |  69.26   |   30.74    |
+| elastic_transform_5 |  66.57   |   33.43    |
+|     glass_blur_5    |  63.36   |   36.64    |
+|   gaussian_noise_5  |  63.05   |   36.95    |
+|      pixelate_5     |  68.23   |   31.77    |
+|  jpeg_compression_5 |  62.48   |   37.52    |
+|   impulse_noise_5   |  59.42   |   40.58    |
+|      Total Avg      |  65.52   |   34.48    |
++---------------------+----------+------------+ 
+You should better calculate the per-class average by yourself!
+summary: 32.84	37.94	41.70	42.04	29.89	33.26	27.17	24.72	30.74	33.43	36.64	36.95	31.77	37.52	40.58
+
+2025-07-26 19:56:18,873 TTA INFO: Namespace(adapter_config_file='configs/adapter/rotta.yaml', dataset_config_file='configs/dataset/cifar100.yaml', order_config_file='', opts=['OUTPUT_DIR', 'RoTTA/cifar100'])
+2025-07-26 19:56:18,873 TTA INFO: Loaded configuration file: 
+	adapter: configs/adapter/rotta.yaml
+	dataset: configs/dataset/cifar100.yaml
+	order: 
+2025-07-26 19:56:18,873 TTA INFO: Running with config:
+ADAPTER:
+  APQ:
+    AGE_FACTOR: 10.0
+    LAMBDA_D: 0.1
+  NAME: rotta
+  RoTTA:
+    ALPHA: 0.05
+    LAMBDA_T: 1.0
+    LAMBDA_U: 1.0
+    MEMORY_SIZE: 256
+    NU: 0.001
+    UPDATE_FREQUENCY: 64
+BN:
+  EPS: 1e-05
+  MOM: 0.1
+CKPT_DIR: ./ckpt
+CORRUPTION:
+  DATASET: cifar100
+  NUM_CLASS: 100
+  NUM_EX: 10000
+  SEVERITY: [5]
+  SOURCE: 
+  TYPE: ['motion_blur', 'snow', 'fog', 'shot_noise', 'defocus_blur', 'contrast', 'zoom_blur', 'brightness', 'frost', 'elastic_transform', 'glass_blur', 'gaussian_noise', 'pixelate', 'jpeg_compression', 'impulse_noise']
+CUDNN:
+  BENCHMARK: True
+DATA_DIR: ./datasets
+DEBUG: 0
+DESC: 
+INPUT:
+  INTERPOLATION: bilinear
+  PIXEL_MEAN: [0.485, 0.456, 0.406]
+  PIXEL_STD: [0.229, 0.224, 0.225]
+  SIZE: (32, 32)
+  TRANSFORMS: ('normalize',)
+LOADER:
+  NUM_WORKS: 2
+  SAMPLER:
+    GAMMA: 0.1
+    TYPE: temporal
+LOG_DEST: log.txt
+LOG_TIME: 
+MODEL:
+  ARCH: Hendrycks2020AugMix_ResNeXt
+  EPISODIC: False
+  PROJECTION:
+    EMB_DIM: 2048
+    FEA_DIM: 128
+    HEAD: linear
+OPTIM:
+  BETA: 0.9
+  DAMPENING: 0.0
+  LR: 0.001
+  METHOD: Adam
+  MOMENTUM: 0.9
+  NESTEROV: True
+  STEPS: 1
+  WD: 0.0
+OUTPUT_DIR: RoTTA/cifar100
+SEED: -1
+TEST:
+  BATCH_SIZE: 64
+2025-07-26 20:04:37,730 TTA INFO: Namespace(adapter_config_file='configs/adapter/rotta.yaml', dataset_config_file='configs/dataset/cifar100.yaml', order_config_file='', opts=['OUTPUT_DIR', 'RoTTA/cifar100'])
+2025-07-26 20:04:37,731 TTA INFO: Loaded configuration file: 
+	adapter: configs/adapter/rotta.yaml
+	dataset: configs/dataset/cifar100.yaml
+	order: 
+2025-07-26 20:04:37,731 TTA INFO: Running with config:
+ADAPTER:
+  APQ:
+    AGE_FACTOR: 10.0
+    LAMBDA_D: 0.1
+  NAME: rotta
+  RoTTA:
+    ALPHA: 0.05
+    LAMBDA_T: 1.0
+    LAMBDA_U: 1.0
+    MEMORY_SIZE: 192
+    NU: 0.001
+    UPDATE_FREQUENCY: 64
+BN:
+  EPS: 1e-05
+  MOM: 0.1
+CKPT_DIR: ./ckpt
+CORRUPTION:
+  DATASET: cifar100
+  NUM_CLASS: 100
+  NUM_EX: 10000
+  SEVERITY: [5]
+  SOURCE: 
+  TYPE: ['motion_blur', 'snow', 'fog', 'shot_noise', 'defocus_blur', 'contrast', 'zoom_blur', 'brightness', 'frost', 'elastic_transform', 'glass_blur', 'gaussian_noise', 'pixelate', 'jpeg_compression', 'impulse_noise']
+CUDNN:
+  BENCHMARK: True
+DATA_DIR: ./datasets
+DEBUG: 0
+DESC: 
+INPUT:
+  INTERPOLATION: bilinear
+  PIXEL_MEAN: [0.485, 0.456, 0.406]
+  PIXEL_STD: [0.229, 0.224, 0.225]
+  SIZE: (32, 32)
+  TRANSFORMS: ('normalize',)
+LOADER:
+  NUM_WORKS: 2
+  SAMPLER:
+    GAMMA: 0.1
+    TYPE: temporal
+LOG_DEST: log.txt
+LOG_TIME: 
+MODEL:
+  ARCH: Hendrycks2020AugMix_ResNeXt
+  EPISODIC: False
+  PROJECTION:
+    EMB_DIM: 2048
+    FEA_DIM: 128
+    HEAD: linear
+OPTIM:
+  BETA: 0.9
+  DAMPENING: 0.0
+  LR: 0.001
+  METHOD: Adam
+  MOMENTUM: 0.9
+  NESTEROV: True
+  STEPS: 1
+  WD: 0.0
+OUTPUT_DIR: RoTTA/cifar100
+SEED: -1
+TEST:
+  BATCH_SIZE: 64
+2025-07-26 20:33:57,501 TTA.test_time INFO: All Results
++---------------------+----------+------------+
+|      Corruption     | Accuracy | Error Rate |
++---------------------+----------+------------+
+|    motion_blur_5    |  67.41   |   32.59    |
+|        snow_5       |  62.47   |   37.53    |
+|        fog_5        |  58.65   |   41.35    |
+|     shot_noise_5    |  57.60   |   42.40    |
+|    defocus_blur_5   |  70.37   |   29.63    |
+|      contrast_5     |  66.04   |   33.96    |
+|     zoom_blur_5     |  72.53   |   27.47    |
+|     brightness_5    |  75.66   |   24.34    |
+|       frost_5       |  68.97   |   31.03    |
+| elastic_transform_5 |  66.57   |   33.43    |
+|     glass_blur_5    |  63.12   |   36.88    |
+|   gaussian_noise_5  |  63.36   |   36.64    |
+|      pixelate_5     |  68.03   |   31.97    |
+|  jpeg_compression_5 |  62.87   |   37.13    |
+|   impulse_noise_5   |  59.57   |   40.43    |
+|      Total Avg      |  65.55   |   34.45    |
++---------------------+----------+------------+ 
+You should better calculate the per-class average by yourself!
+summary: 32.59	37.53	41.35	42.40	29.63	33.96	27.47	24.34	31.03	33.43	36.88	36.64	31.97	37.13	40.43
+

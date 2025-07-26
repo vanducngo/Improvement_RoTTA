@@ -8,27 +8,29 @@ from ..utils.bn_layers import RobustBN1d, RobustBN2d
 from ..utils.utils import set_named_submodule, get_named_submodule
 from ..utils.custom_transforms import get_tta_transforms
 
-
+IS_USE_IMPROVE = False
 class RoTTA(BaseAdapter):
     def __init__(self, cfg, model, optimizer):
         super(RoTTA, self).__init__(cfg, model, optimizer)
         
-        self.mem = memory.CSTU(
-            capacity=self.cfg.ADAPTER.RoTTA.MEMORY_SIZE, 
-            num_class=cfg.CORRUPTION.NUM_CLASS, 
-            lambda_t=cfg.ADAPTER.RoTTA.LAMBDA_T, 
-            lambda_u=cfg.ADAPTER.RoTTA.LAMBDA_U
-        )
+        if IS_USE_IMPROVE:
+            self.mem = memory_apq.APQMem(
+                capacity=self.cfg.ADAPTER.RoTTA.MEMORY_SIZE,
+                num_class=self.cfg.CORRUPTION.NUM_CLASS,
+                lambda_t=self.cfg.ADAPTER.RoTTA.LAMBDA_T,
+                lambda_u=self.cfg.ADAPTER.RoTTA.LAMBDA_U,
+                lambda_d=self.cfg.ADAPTER.APQ.LAMBDA_D,  # Tham số mới
+                age_factor_bonus=self.cfg.ADAPTER.APQ.AGE_FACTOR  # Tham số mới
+            )
+        else:
+            self.mem = memory.CSTU(
+                capacity=self.cfg.ADAPTER.RoTTA.MEMORY_SIZE, 
+                num_class=cfg.CORRUPTION.NUM_CLASS, 
+                lambda_t=cfg.ADAPTER.RoTTA.LAMBDA_T, 
+                lambda_u=cfg.ADAPTER.RoTTA.LAMBDA_U
+            )
         
-        # self.mem = memory_apq.APQMem(
-        #     capacity=self.cfg.ADAPTER.RoTTA.MEMORY_SIZE,
-        #     num_class=self.cfg.CORRUPTION.NUM_CLASS,
-        #     lambda_t=self.cfg.ADAPTER.RoTTA.LAMBDA_T,
-        #     lambda_u=self.cfg.ADAPTER.RoTTA.LAMBDA_U,
-        #     lambda_d=self.cfg.ADAPTER.APQ.LAMBDA_D,  # Tham số mới
-        #     age_factor_bonus=self.cfg.ADAPTER.APQ.AGE_FACTOR  # Tham số mới
-        # )
-
+        
         # Khởi tạo một biến để theo dõi entropy
         self.ema_entropy = 0.0
         self.alpha_entropy = 0.99 # Hệ số EMA cho entropy
@@ -66,8 +68,10 @@ class RoTTA(BaseAdapter):
             uncertainty = entropy[i].item()
             current_instance = (data, p_l, uncertainty)
 
-            self.mem.add_instance(current_instance)
-            # self.mem.add_instance(current_instance, drift_signal)
+            if IS_USE_IMPROVE:
+                self.mem.add_instance(current_instance, drift_signal)
+            else:
+                self.mem.add_instance(current_instance)
 
             self.current_instance += 1
 
