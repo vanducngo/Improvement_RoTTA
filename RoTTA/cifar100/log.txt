@@ -132,3 +132,27 @@ OUTPUT_DIR: RoTTA/cifar100
 SEED: -1
 TEST:
   BATCH_SIZE: 64
+2025-07-26 22:09:00,739 TTA.test_time INFO: All Results
++---------------------+----------+------------+
+|      Corruption     | Accuracy | Error Rate |
++---------------------+----------+------------+
+|    motion_blur_5    |  67.14   |   32.86    |
+|        snow_5       |  61.80   |   38.20    |
+|        fog_5        |  58.77   |   41.23    |
+|     shot_noise_5    |  56.86   |   43.14    |
+|    defocus_blur_5   |  70.19   |   29.81    |
+|      contrast_5     |  63.67   |   36.33    |
+|     zoom_blur_5     |  72.31   |   27.69    |
+|     brightness_5    |  75.48   |   24.52    |
+|       frost_5       |  69.22   |   30.78    |
+| elastic_transform_5 |  66.41   |   33.59    |
+|     glass_blur_5    |  63.11   |   36.89    |
+|   gaussian_noise_5  |  63.06   |   36.94    |
+|      pixelate_5     |  67.22   |   32.78    |
+|  jpeg_compression_5 |  62.64   |   37.36    |
+|   impulse_noise_5   |  58.54   |   41.46    |
+|      Total Avg      |  65.09   |   34.91    |
++---------------------+----------+------------+ 
+You should better calculate the per-class average by yourself!
+summary: 32.86	38.20	41.23	43.14	29.81	36.33	27.69	24.52	30.78	33.59	36.89	36.94	32.78	37.36	41.46
+
